@@ -49,6 +49,51 @@ examtubeBillingBaseUrl=https://your-api-host
 The Android build reads `GOOGLE_WEB_CLIENT_ID` automatically when the Gradle
 property is not present.
 
+## Google Android OAuth certificate
+
+Google’s Android OAuth client requires both the application ID and the SHA-1
+fingerprint of the certificate that signs the APK. The web client ID used by
+`requestIdToken` is a separate OAuth client.
+
+This source does not contain a signing keystore. Generate the fingerprint on
+the machine that builds ExamTube:
+
+### Development/debug build
+
+The default debug application ID is `app.examtube.com.debug`:
+
+```bash
+keytool -list -v \
+  -alias androiddebugkey \
+  -keystore "$HOME/.android/debug.keystore" \
+  -storepass android \
+  -keypass android | grep -E 'SHA1:|SHA-1:'
+```
+
+Create an Android OAuth client in Google Cloud with:
+
+- Package name: `app.examtube.com.debug`
+- SHA-1 certificate: the value printed by the command
+
+### Release build
+
+For a release APK, use the keystore used by the release signing process:
+
+```bash
+keytool -list -v \
+  -keystore /path/to/examtube-release.jks \
+  -alias YOUR_RELEASE_ALIAS | grep -E 'SHA1:|SHA-1:'
+```
+
+Create another Android OAuth client with:
+
+- Package name: `app.examtube.com`
+- SHA-1 certificate: the release certificate value
+
+If you use the `continuous` build type, its default package is
+`app.examtube.com.continuous`, so register that package with the certificate
+used by that build as well.
+
 The Razorpay key ID is safe to use in the checkout client. The key secret must never be
 added to Gradle or shipped in the APK.
 
