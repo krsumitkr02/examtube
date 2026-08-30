@@ -1,6 +1,6 @@
-# [Project name]
+# ExamTube
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+An Android customization fork of NewPipe with an ExamTube-branded Google sign-in and Razorpay subscription gate.
 
 ## Run & Operate
 
@@ -22,23 +22,33 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `newpipe-source/` — extracted Android/Kotlin Multiplatform NewPipe source.
+- `newpipe-source/app/src/main/java/org/schabi/newpipe/examtube/` — ExamTube access gate, entitlement cache, and Razorpay client.
+- `artifacts/api-server/src/routes/examtube.ts` — Google ID-token and Razorpay subscription verification endpoints.
+- `EXAMTUBE_SETUP.md` — required Google/Razorpay configuration and the end-to-end access flow.
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The Android application ID is `app.examtube.com`, while upstream source package declarations remain intact to avoid a risky global package migration.
+- MainActivity refuses direct entry unless the entitlement cache was written after server-side subscription verification.
+- Razorpay's secret is server-only; the Android app receives a subscription ID and sends payment data back for verification.
+- The upstream NewPipe GPL license and attribution notices remain in the extracted source.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+ExamTube retains NewPipe's media browsing, playback, download, and subscription features, but requires Google sign-in followed by an active Razorpay subscription before the main screen is available.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Branding requested: ExamTube.
+- Android application ID requested: `app.examtube.com`.
+- Billing requested: Razorpay subscriptions.
+- Entry flow requested: Google sign-in, then subscription purchase, then the existing main page after splash.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Production credentials must stay in server environment secrets and never be embedded in the APK.
+- The Razorpay integration was scaffolded without live credentials, so checkout remains intentionally unavailable until the required values are configured.
 
 ## Pointers
 

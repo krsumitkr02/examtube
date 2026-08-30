@@ -1,0 +1,7 @@
+## ExamTube build configuration
+## Merge these keys into gradle.properties or pass them with -P.
+## Do not commit production credentials.
+examtubeGoogleWebClientId=
+examtubeRazorpayKeyId=
+examtubeRazorpayPlanId=
+examtubeBillingBaseUrl=
