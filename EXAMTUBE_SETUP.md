@@ -55,6 +55,19 @@ Google’s Android OAuth client requires both the application ID and the SHA-1
 fingerprint of the certificate that signs the APK. The web client ID used by
 `requestIdToken` is a separate OAuth client.
 
+You need both clients:
+
+1. **Android client** — choose Android in Google Cloud and enter package
+   `app.examtube.com` plus the SHA-1 fingerprint below. This authorizes the
+   installed Android app.
+2. **Web application client** — choose Web application in Google Cloud and copy
+   its client ID ending in `.apps.googleusercontent.com`. ExamTube uses this
+   value as the ID-token audience so the billing server can verify the token.
+   It does not mean ExamTube needs a browser-based login page.
+
+The value stored as `GOOGLE_WEB_CLIENT_ID` must be the Web application client
+ID, not the Android client ID.
+
 This source does not contain a signing keystore. Generate the fingerprint on
 the machine that builds ExamTube:
 
