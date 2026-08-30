@@ -35,6 +35,18 @@ configure<ApplicationExtension> {
         .gradleProperty("examtubeGoogleWebClientId")
         .orElse(providers.environmentVariable("GOOGLE_WEB_CLIENT_ID"))
         .getOrElse("")
+    val razorpayKeyId = providers
+        .gradleProperty("examtubeRazorpayKeyId")
+        .orElse(providers.environmentVariable("RAZORPAY_KEY_ID"))
+        .getOrElse("")
+    val razorpayPlanId = providers
+        .gradleProperty("examtubeRazorpayPlanId")
+        .orElse(providers.environmentVariable("RAZORPAY_PLAN_ID"))
+        .getOrElse("")
+    val billingBaseUrl = providers
+        .gradleProperty("examtubeBillingBaseUrl")
+        .orElse(providers.environmentVariable("EXAMTUBE_BILLING_BASE_URL"))
+        .getOrElse("")
 
     compileSdk {
         version = release(NEWPIPE_VERSION_SDK_COMPILE_MAJOR) {
@@ -54,17 +66,17 @@ configure<ApplicationExtension> {
         buildConfigField(
             "String",
             "EXAMTUBE_RAZORPAY_KEY_ID",
-            "\"${providers.gradleProperty("examtubeRazorpayKeyId").getOrElse("")}\""
+            "\"$razorpayKeyId\""
         )
         buildConfigField(
             "String",
             "EXAMTUBE_RAZORPAY_PLAN_ID",
-            "\"${providers.gradleProperty("examtubeRazorpayPlanId").getOrElse("")}\""
+            "\"$razorpayPlanId\""
         )
         buildConfigField(
             "String",
             "EXAMTUBE_BILLING_BASE_URL",
-            "\"${providers.gradleProperty("examtubeBillingBaseUrl").getOrElse("")}\""
+            "\"$billingBaseUrl\""
         )
         minSdk {
             version = release(NEWPIPE_VERSION_SDK_MIN)
