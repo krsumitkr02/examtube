@@ -23,3 +23,5 @@ timeoutMs = 20000
 
 [userenv.shared]
 GOOGLE_WEB_CLIENT_ID = "801093077862-q461rdct4nfuvkmi0cm0pdlcd4io5prb.apps.googleusercontent.com"
+RAZORPAY_KEY_ID = "rzp_test_TW5VNEHaPhBdlu"
+RAZORPAY_PLAN_ID = "rzp_test_TW5VNEHaPhBdlu"
