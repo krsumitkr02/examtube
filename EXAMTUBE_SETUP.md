@@ -36,7 +36,8 @@ successful server verification; there is no “unlock” debug toggle.
 ### Android build properties
 
 Merge the keys from `newpipe-source/gradle.properties.example` into
-`newpipe-source/gradle.properties` and set:
+`newpipe-source/gradle.properties` and set them, or provide
+`GOOGLE_WEB_CLIENT_ID` as a shared project environment variable:
 
 ```properties
 examtubeGoogleWebClientId=YOUR_GOOGLE_WEB_CLIENT_ID
@@ -44,6 +45,9 @@ examtubeRazorpayKeyId=rzp_test_or_live_key_id
 examtubeRazorpayPlanId=plan_created_in_razorpay
 examtubeBillingBaseUrl=https://your-api-host
 ```
+
+The Android build reads `GOOGLE_WEB_CLIENT_ID` automatically when the Gradle
+property is not present.
 
 The Razorpay key ID is safe to use in the checkout client. The key secret must never be
 added to Gradle or shipped in the APK.

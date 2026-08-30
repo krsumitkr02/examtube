@@ -31,6 +31,11 @@ kotlin {
 }
 
 configure<ApplicationExtension> {
+    val googleWebClientId = providers
+        .gradleProperty("examtubeGoogleWebClientId")
+        .orElse(providers.environmentVariable("GOOGLE_WEB_CLIENT_ID"))
+        .getOrElse("")
+
     compileSdk {
         version = release(NEWPIPE_VERSION_SDK_COMPILE_MAJOR) {
             minorApiLevel = NEWPIPE_VERSION_SDK_COMPILE_MINOR
@@ -44,7 +49,7 @@ configure<ApplicationExtension> {
         buildConfigField(
             "String",
             "EXAMTUBE_GOOGLE_WEB_CLIENT_ID",
-            "\"${providers.gradleProperty("examtubeGoogleWebClientId").getOrElse("")}\""
+            "\"$googleWebClientId\""
         )
         buildConfigField(
             "String",
