@@ -60,7 +60,7 @@ the machine that builds ExamTube:
 
 ### Development/debug build
 
-The default debug application ID is `app.examtube.com.debug`:
+The default debug application ID is the final ID `app.examtube.com`:
 
 ```bash
 keytool -list -v \
@@ -72,7 +72,7 @@ keytool -list -v \
 
 Create an Android OAuth client in Google Cloud with:
 
-- Package name: `app.examtube.com.debug`
+- Package name: `app.examtube.com`
 - SHA-1 certificate: `22:48:A2:47:7F:E7:4C:AC:5E:A5:29:58:4C:D0:DF:E1:FD:AC:E2:09`
 
 This fingerprint belongs to the new debug certificate generated for the current
@@ -87,11 +87,6 @@ keytool -list -v \
   -keystore /path/to/examtube-release.jks \
   -alias YOUR_RELEASE_ALIAS | grep -E 'SHA1:|SHA-1:'
 ```
-
-Create another Android OAuth client with:
-
-- Package name: `app.examtube.com`
-- SHA-1 certificate: the release certificate value
 
 If you use the `continuous` build type, its default package is
 `app.examtube.com.continuous`, so register that package with the certificate

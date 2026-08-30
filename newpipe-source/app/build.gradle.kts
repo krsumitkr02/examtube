@@ -84,15 +84,7 @@ configure<ApplicationExtension> {
     buildTypes {
         debug {
             isDebuggable = true
-
-            // suffix the app id and the app name with git branch name
-            if (normalizedWorkingBranch.isEmpty() || workingBranch in defaultBranches) {
-                applicationIdSuffix = ".debug"
-                resValue("string", "app_name", "$EXAMTUBE_APP_NAME Debug")
-            } else {
-                applicationIdSuffix = ".debug.$normalizedWorkingBranch"
-                resValue("string", "app_name", "$EXAMTUBE_APP_NAME $workingBranch")
-            }
+            resValue("string", "app_name", "$EXAMTUBE_APP_NAME Debug")
         }
 
         release {
