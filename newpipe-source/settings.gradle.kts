@@ -3,7 +3,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-rootProject.name = "ExamTube"
+// Keep the upstream Gradle root name so Compose Multiplatform resource
+// accessors retain the package imported by the shared source.
+rootProject.name = "NewPipe"
 
 pluginManagement {
     repositories {

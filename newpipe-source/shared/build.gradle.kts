@@ -49,9 +49,7 @@ kotlin {
     android {
         namespace = NEWPIPE_APPLICATION_ID_NEW
         compileSdk {
-            version = release(NEWPIPE_VERSION_SDK_COMPILE_MAJOR) {
-                minorApiLevel = NEWPIPE_VERSION_SDK_COMPILE_MINOR
-            }
+            version = release(NEWPIPE_VERSION_SDK_COMPILE_MAJOR)
         }
         minSdk {
             version = release(NEWPIPE_VERSION_SDK_MIN)
