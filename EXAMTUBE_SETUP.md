@@ -86,10 +86,11 @@ keytool -list -v \
 Create an Android OAuth client in Google Cloud with:
 
 - Package name: `app.examtube.com`
-- SHA-1 certificate: `22:48:A2:47:7F:E7:4C:AC:5E:A5:29:58:4C:D0:DF:E1:FD:AC:E2:09`
+- SHA-1 certificate: `6F:EA:5B:ED:EA:7C:EE:A7:BE:02:82:CC:7C:C2:02:57:6F:E8:11:C9`
 
-This fingerprint belongs to the new debug certificate generated for the current
-workspace. Build the debug APK in this same workspace so the certificate matches.
+This fingerprint belongs to the debug certificate used by the current APK in this
+workspace. If the APK is rebuilt on another machine, generate and register that
+machine's debug certificate fingerprint instead.
 
 ### Release build
 
