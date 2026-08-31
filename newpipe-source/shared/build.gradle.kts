@@ -15,8 +15,9 @@ plugins {
 
 // Better than adding a third-party dependency for something as simple as this
 // https://stackoverflow.com/a/74771876/8446131
-val buildConfigGenerator by tasks.registering(Sync::class) {
+val buildConfigGenerator by tasks.registering {
     val buildConfigPackage = NEWPIPE_APPLICATION_ID_NEW
+    val outputDirectory = layout.buildDirectory.dir("generated/kotlin")
     val rawClass = """
         package $buildConfigPackage
 
@@ -25,11 +26,18 @@ val buildConfigGenerator by tasks.registering(Sync::class) {
             const val APP_NAME = "NewPipe"
         }
     """.trimIndent()
-    from(resources.text.fromString(rawClass)) {
-        rename { "BuildConfig.kt" }
-        into(buildConfigPackage.replace(".", "/"))
+
+    inputs.property("buildConfigPackage", buildConfigPackage)
+    inputs.property("versionName", NEWPIPE_VERSION_NAME)
+    outputs.dir(outputDirectory)
+
+    doLast {
+        val outputFile = outputDirectory.get()
+            .file("${buildConfigPackage.replace(".", "/")}/BuildConfig.kt")
+            .asFile
+        outputFile.parentFile.mkdirs()
+        outputFile.writeText(rawClass)
     }
-    into(layout.buildDirectory.dir("generated/kotlin/"))
 }
 
 kotlin {
@@ -89,7 +97,7 @@ kotlin {
 
     sourceSets {
         commonMain {
-            kotlin.srcDir(buildConfigGenerator.map { it.destinationDir })
+            kotlin.srcDir(buildConfigGenerator)
             dependencies {
                 implementation(libs.jetbrains.compose.runtime)
                 implementation(libs.jetbrains.compose.foundation)
