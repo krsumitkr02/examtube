@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "dtOpJoxVcT0HYOnMDa8xi"
+uri = "file://newpipe-source/app/build/outputs/apk/debug/app-debug.apk"
+type = "unspecified"
+title = "ExamTube debug APK"
+description = "Installable debug APK for ExamTube, package app.examtube.com. Built successfully and verified with Android package metadata."
+logical_id = "17cd93b1-20e8-44b7-a458-7b8871fba553"
+content_hash = "sha256:dc9639cfaddb4e7618ab0e6e006e077ce06d998c0a5a2d2380df12b639402f5e"
+size = 35180544
+mtime_ms = 1788201656119
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:860d9d77-410f-43a9-b856-5f9205db8fed/17cd93b1-20e8-44b7-a458-7b8871fba553/f9f9a0e8-7efc-40eb-9a69-202662090ba1"
+storage_version_token = "1788201670643766"
+content_type = "application/octet-stream"

@@ -1,0 +1,1 @@
+- [Android SDK compatibility](android-build-sdk.md) — distinguish dependency metadata requirements from actual Android source compilation failures.
