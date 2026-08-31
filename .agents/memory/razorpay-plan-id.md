@@ -8,3 +8,9 @@ Razorpay subscription creation requires a plan identifier beginning with `plan_`
 **Why:** Using the key ID makes Razorpay return a non-success response, and reading an HTTP error through `HttpURLConnection.inputStream` can surface the API URL instead of the real error.
 
 **How to apply:** Keep the plan ID server-side in the Render environment, and read `errorStream` for non-2xx Android API responses so configuration failures remain actionable.
+
+Razorpay subscription creation also requires an explicit positive `total_count` unless perpetual subscriptions are enabled for the account.
+
+**Why:** Accounts without perpetual subscription access reject requests that omit the billing-cycle count.
+
+**How to apply:** Send a configured number of billing cycles, defaulting to 12 for a monthly one-year subscription unless the product's plan requires another duration.

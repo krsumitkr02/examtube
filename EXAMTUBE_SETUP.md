@@ -128,7 +128,13 @@ GOOGLE_WEB_CLIENT_ID
 RAZORPAY_KEY_ID
 RAZORPAY_KEY_SECRET
 RAZORPAY_PLAN_ID
+RAZORPAY_TOTAL_COUNT
 ```
+
+`RAZORPAY_TOTAL_COUNT` is the number of times Razorpay should bill the plan. It
+defaults to `12` when omitted, which is appropriate for a monthly plan billed for
+one year. Set it explicitly on Render if your plan uses a different billing period
+or subscription length.
 
 The current source includes the complete verification path but no production credentials
 were added. Until these values are configured, the app intentionally shows a clear

@@ -99,10 +99,17 @@ router.post("/examtube/subscription", async (req, res) => {
   try {
     const user = await readGoogleUser(req.body?.idToken);
     const planId = requiredEnv("RAZORPAY_PLAN_ID");
+    const totalCount = Number.parseInt(process.env.RAZORPAY_TOTAL_COUNT ?? "12", 10);
+    if (!Number.isSafeInteger(totalCount) || totalCount < 1) {
+      throw new ConfigurationError(
+        "RAZORPAY_TOTAL_COUNT must be a positive whole number of billing cycles.",
+      );
+    }
     const subscription = await razorpayRequest<RazorpaySubscription>("/subscriptions", {
       method: "POST",
       body: JSON.stringify({
         plan_id: planId,
+        total_count: totalCount,
         customer_notify: 1,
         notes: {
           app: "ExamTube",
