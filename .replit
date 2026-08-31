@@ -26,3 +26,7 @@ GOOGLE_WEB_CLIENT_ID = "801093077862-q461rdct4nfuvkmi0cm0pdlcd4io5prb.apps.googl
 RAZORPAY_KEY_ID = "rzp_test_TW5VNEHaPhBdlu"
 RAZORPAY_PLAN_ID = "rzp_test_TW5VNEHaPhBdlu"
 EXAMTUBE_BILLING_BASE_URL = "https://examtube.onrender.com"
+
+[nix]
+channel = "stable-25_05"
+packages = ["jdk21"]
