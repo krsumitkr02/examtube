@@ -1,0 +1,10 @@
+---
+name: Razorpay subscription plan IDs
+description: Separates Razorpay checkout keys from subscription plan identifiers and preserves useful API errors.
+---
+
+Razorpay subscription creation requires a plan identifier beginning with `plan_`; the checkout key identifier beginning with `rzp_` cannot be used as `plan_id`.
+
+**Why:** Using the key ID makes Razorpay return a non-success response, and reading an HTTP error through `HttpURLConnection.inputStream` can surface the API URL instead of the real error.
+
+**How to apply:** Keep the plan ID server-side in the Render environment, and read `errorStream` for non-2xx Android API responses so configuration failures remain actionable.

@@ -85,9 +85,21 @@ object RazorpaySubscriptionClient {
                     output.write(body.toString().toByteArray(StandardCharsets.UTF_8))
                 }
 
-                val response = connection.inputStream.bufferedReader().use { it.readText() }
-                if (connection.responseCode !in 200..299) {
-                    error("Billing server returned HTTP ${connection.responseCode}: $response")
+                val responseCode = connection.responseCode
+                val responseStream = if (responseCode in 200..299) {
+                    connection.inputStream
+                } else {
+                    connection.errorStream
+                }
+                val response = responseStream?.bufferedReader()?.use { it.readText() }.orEmpty()
+                if (responseCode !in 200..299) {
+                    val serverMessage = runCatching {
+                        JSONObject(response).optString("error")
+                    }.getOrNull()?.takeIf { it.isNotBlank() }
+                    error(
+                        serverMessage
+                            ?: "Billing server returned HTTP $responseCode."
+                    )
                 }
                 JSONObject(response)
             }

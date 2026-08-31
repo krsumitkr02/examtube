@@ -1,1 +1,2 @@
 - [Android SDK compatibility](android-build-sdk.md) — distinguish dependency metadata requirements from actual Android source compilation failures.
+- [Razorpay plan IDs](razorpay-plan-id.md) — keep `plan_` subscription IDs separate from `rzp_` checkout keys and preserve API errors.

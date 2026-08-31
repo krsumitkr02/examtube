@@ -109,6 +109,10 @@ used by that build as well.
 The Razorpay key ID is safe to use in the checkout client. The key secret must never be
 added to Gradle or shipped in the APK.
 
+`RAZORPAY_KEY_ID` identifies the checkout account and normally starts with `rzp_test_`
+or `rzp_live_`. `RAZORPAY_PLAN_ID` must be the subscription plan ID created in the
+same Razorpay mode and starts with `plan_`; never use the key ID as the plan ID.
+
 ### Billing server environment
 
 The API server exposes:
