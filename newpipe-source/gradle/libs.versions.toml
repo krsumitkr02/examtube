@@ -50,13 +50,13 @@ multiplatform = "1.11.1"
 navigation3 = "1.1.1"
 okhttp = "5.5.0"
 phoenix = "3.0.0"
+play-services-auth = "21.4.0"
 preference = "1.2.1"
 prettytime = "5.0.8.Final"
-recyclerview = "1.4.0"
 razorpay = "1.6.41"
+recyclerview = "1.4.0"
 room = "2.8.4"
 runner = "1.7.0"
-play-services-auth = "21.4.0"
 rxandroid = "3.0.2"
 rxbinding = "4.0.0"
 rxjava = "3.1.12"
@@ -119,7 +119,6 @@ evernote-statesaver-core = { module = "com.evernote:android-state", version.ref 
 facebook-stetho-core = { module = "com.facebook.stetho:stetho", version.ref = "stetho" }
 facebook-stetho-okhttp3 = { module = "com.facebook.stetho:stetho-okhttp3", version.ref = "stetho" }
 google-android-material = { module = "com.google.android.material:material", version.ref = "material" }
-google-play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "play-services-auth" }
 google-autoservice-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoservice-google" }
 google-exoplayer-core = { module = "com.google.android.exoplayer:exoplayer-core", version.ref = "exoplayer" }
 google-exoplayer-dash = { module = "com.google.android.exoplayer:exoplayer-dash", version.ref = "exoplayer" }
@@ -129,6 +128,7 @@ google-exoplayer-hls = { module = "com.google.android.exoplayer:exoplayer-hls", 
 google-exoplayer-mediasession = { module = "com.google.android.exoplayer:extension-mediasession", version.ref = "exoplayer" }
 google-exoplayer-smoothstreaming = { module = "com.google.android.exoplayer:exoplayer-smoothstreaming", version.ref = "exoplayer" }
 google-exoplayer-ui = { module = "com.google.android.exoplayer:exoplayer-ui", version.ref = "exoplayer" }
+google-play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "play-services-auth" }
 jakewharton-phoenix = { module = "com.jakewharton:process-phoenix", version.ref = "phoenix" }
 jakewharton-rxbinding = { module = "com.jakewharton.rxbinding4:rxbinding", version.ref = "rxbinding" }
 jetbrains-compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "multiplatform" }

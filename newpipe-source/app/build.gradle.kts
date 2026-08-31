@@ -49,9 +49,7 @@ configure<ApplicationExtension> {
         .getOrElse("")
 
     compileSdk {
-        version = release(NEWPIPE_VERSION_SDK_COMPILE_MAJOR) {
-            minorApiLevel = NEWPIPE_VERSION_SDK_COMPILE_MINOR
-        }
+        version = release(NEWPIPE_VERSION_SDK_COMPILE_MAJOR)
     }
     namespace = NEWPIPE_APPLICATION_ID_OLD
 

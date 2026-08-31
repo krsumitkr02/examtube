@@ -15,10 +15,9 @@ import android.content.Context
 class AccessSessionStore(context: Context) {
     private val preferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
 
-    fun hasVerifiedAccess(): Boolean =
-        preferences.getBoolean(KEY_VERIFIED_ACCESS, false) &&
-            !preferences.getString(KEY_GOOGLE_USER_ID, null).isNullOrBlank() &&
-            !preferences.getString(KEY_SUBSCRIPTION_ID, null).isNullOrBlank()
+    fun hasVerifiedAccess(): Boolean = preferences.getBoolean(KEY_VERIFIED_ACCESS, false) &&
+        !preferences.getString(KEY_GOOGLE_USER_ID, null).isNullOrBlank() &&
+        !preferences.getString(KEY_SUBSCRIPTION_ID, null).isNullOrBlank()
 
     fun saveVerifiedAccess(googleUserId: String, subscriptionId: String) {
         preferences.edit()

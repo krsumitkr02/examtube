@@ -6,11 +6,11 @@ package org.schabi.newpipe.examtube
 
 import android.os.Handler
 import android.os.Looper
-import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.Executors
+import org.json.JSONObject
 
 object RazorpaySubscriptionClient {
     private val executor = Executors.newSingleThreadExecutor()
@@ -68,8 +68,10 @@ object RazorpaySubscriptionClient {
                     "ExamTube billing server is not configured. Set examtubeBillingBaseUrl."
                 }
 
-                val connection = (URL("$baseUrl/api/examtube$path").openConnection()
-                    as HttpURLConnection).apply {
+                val connection = (
+                    URL("$baseUrl/api/examtube$path").openConnection()
+                        as HttpURLConnection
+                    ).apply {
                     requestMethod = "POST"
                     connectTimeout = 15_000
                     readTimeout = 15_000
