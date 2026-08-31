@@ -2,6 +2,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { Router, type IRouter } from "express";
 
 const router: IRouter = Router();
+const EXTERNAL_REQUEST_TIMEOUT_MS = 15_000;
 
 type GoogleUser = {
   sub: string;
@@ -33,6 +34,7 @@ async function readGoogleUser(idToken: unknown): Promise<GoogleUser> {
 
   const response = await fetch(
     `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`,
+    { signal: AbortSignal.timeout(EXTERNAL_REQUEST_TIMEOUT_MS) },
   );
   const payload = (await response.json()) as GoogleUser & { error_description?: string };
   if (!response.ok || !payload.sub || payload.aud !== requiredEnv("GOOGLE_WEB_CLIENT_ID")) {
@@ -56,6 +58,7 @@ async function razorpayRequest<T>(path: string, init: RequestInit = {}): Promise
   const response = await fetch(`https://api.razorpay.com/v1${path}`, {
     ...init,
     headers,
+    signal: AbortSignal.timeout(EXTERNAL_REQUEST_TIMEOUT_MS),
   });
   const text = await response.text();
   const payload = (

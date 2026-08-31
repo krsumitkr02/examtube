@@ -6,10 +6,12 @@ package org.schabi.newpipe.examtube
 
 import android.os.Handler
 import android.os.Looper
+import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
 import java.util.concurrent.Executors
+import java.util.concurrent.atomic.AtomicBoolean
 import org.json.JSONObject
 import org.schabi.newpipe.BuildConfig
 
@@ -62,6 +64,17 @@ object RazorpaySubscriptionClient {
         body: JSONObject,
         callback: (Result<JSONObject>) -> Unit
     ) {
+        val completed = AtomicBoolean(false)
+        mainHandler.postDelayed({
+            if (completed.compareAndSet(false, true)) {
+                callback(
+                    Result.failure(
+                        IOException("The billing server timed out. Please try again.")
+                    )
+                )
+            }
+        }, 25_000)
+
         executor.execute {
             val result = runCatching {
                 val baseUrl = BuildConfig.EXAMTUBE_BILLING_BASE_URL.trimEnd('/')
@@ -103,7 +116,11 @@ object RazorpaySubscriptionClient {
                 }
                 JSONObject(response)
             }
-            mainHandler.post { callback(result) }
+            mainHandler.post {
+                if (completed.compareAndSet(false, true)) {
+                    callback(result)
+                }
+            }
         }
     }
 }
