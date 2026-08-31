@@ -14,3 +14,9 @@ Razorpay subscription creation also requires an explicit positive `total_count` 
 **Why:** Accounts without perpetual subscription access reject requests that omit the billing-cycle count.
 
 **How to apply:** Send a configured number of billing cycles, defaulting to 12 for a monthly one-year subscription unless the product's plan requires another duration.
+
+External Google and Razorpay calls should have bounded server-side timeouts, and the Android billing request should recover from a stalled API call instead of leaving both access buttons disabled indefinitely.
+
+**Why:** A slow or unavailable upstream service otherwise leaves the access gate stuck on its loading message with no actionable feedback.
+
+**How to apply:** Keep the server and client timeout windows finite and return a retryable error to the user when they expire.
