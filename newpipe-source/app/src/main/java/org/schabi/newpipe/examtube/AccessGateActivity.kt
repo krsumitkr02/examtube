@@ -20,13 +20,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.razorpay.Checkout
-import com.razorpay.PaymentResultListener
+import com.razorpay.PaymentData
+import com.razorpay.PaymentResultWithDataListener
 import org.json.JSONObject
 import org.schabi.newpipe.BuildConfig
 import org.schabi.newpipe.MainActivity
 import org.schabi.newpipe.R
 
-class AccessGateActivity : AppCompatActivity(), PaymentResultListener {
+class AccessGateActivity : AppCompatActivity(), PaymentResultWithDataListener {
     private lateinit var statusText: TextView
     private lateinit var signInButton: Button
     private lateinit var subscribeButton: Button
@@ -241,10 +242,11 @@ class AccessGateActivity : AppCompatActivity(), PaymentResultListener {
         }
     }
 
-    override fun onPaymentSuccess(paymentId: String?, signature: String?) {
+    override fun onPaymentSuccess(paymentId: String?, paymentData: PaymentData?) {
         val account = googleAccount
         val idToken = account?.idToken
         val subscriptionId = pendingSubscriptionId
+        val signature = paymentData?.signature
         if (idToken.isNullOrBlank() || subscriptionId.isNullOrBlank() || signature.isNullOrBlank()) {
             showError(getString(R.string.examtube_verification_failed))
             setLoading(false)
@@ -276,7 +278,7 @@ class AccessGateActivity : AppCompatActivity(), PaymentResultListener {
         }
     }
 
-    override fun onPaymentError(code: Int, response: String?) {
+    override fun onPaymentError(code: Int, response: String?, paymentData: PaymentData?) {
         showError(response ?: getString(R.string.examtube_checkout_failed))
         setLoading(false)
     }
